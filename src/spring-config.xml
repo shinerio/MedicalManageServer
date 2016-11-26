@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-4.1.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
+
+
+    <!-- 数据源对象 -->
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+        <property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl">
+        </property>
+        <property name="username" value="jack"></property>
+        <property name="password" value="admin"></property>
+    </bean>
+
+    <!-- session工厂，维护会话对象 -->
+    <bean id="sessionFactory"
+          class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource">
+            <ref bean="dataSource" />
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">
+                    org.hibernate.dialect.Oracle9iDialect
+                </prop>
+            </props>
+        </property>
+        <property name="annotatedClasses">
+            <list>
+                <value>com.shinerio.dotest.Users</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 事务管理器 -->
+    <bean id="transactionManager"
+          class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    <tx:annotation-driven transaction-manager="transactionManager" />
+    <!-- 注册注解的后台处理类 -->
+    <context:annotation-config/>
+    <!-- 指明使用注解的类的包 -->
+    <context:component-scan base-package="com.shinerio.dotest"/>
+
+    <bean id="user_test" class="com.shinerio.dotest.Users"></bean>
+    <bean id="userDao_test" class="com.shinerio.dotest.UsersDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+</beans>
