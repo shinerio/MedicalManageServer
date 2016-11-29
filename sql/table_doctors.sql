@@ -10,21 +10,18 @@ Target Server Type    : MYSQL
 Target Server Version : 50552
 File Encoding         : 65001
 
-Date: 2016-11-29 21:35:24
+Date: 2016-11-29 21:09:55
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for patients
+-- Table structure for doctors
 -- ----------------------------
-DROP TABLE IF EXISTS `patients`;
-CREATE TABLE `patients` (
+DROP TABLE IF EXISTS `doctors`;
+CREATE TABLE `doctors` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(50) NOT NULL,
   `password` varchar(50) DEFAULT NULL,
-  `doctor_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `petient_ref_doctor` (`doctor_id`),
-  CONSTRAINT `petient_ref_doctor` FOREIGN KEY (`doctor_id`) REFERENCES `doctors` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

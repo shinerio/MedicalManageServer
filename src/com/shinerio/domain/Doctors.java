@@ -1,29 +1,38 @@
 package com.shinerio.domain;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
- * Created by jstxzhangrui on 2016/11/26.
+ * Created by jstxzhangrui on 2016/11/29.
  */
 @Entity
-@Table(name="Patients")
-public class Patients {
-
+@Table(name="doctors")
+public class Doctors {
     private int id;
     private String username;
     private String password;
-    private Doctors doctor;
 
-    public Patients() {
+
+    private Set<Patients> patientSet = new HashSet<>();
+
+    public Doctors() {
     }
 
-    public Patients(int id, String username, String password, Doctors doctor) {
-        this.id = id;
+    public Doctors(int id,String username, String password) {
         this.username = username;
         this.password = password;
-        this.doctor = doctor;
+        this.id = id;
+    }
+    @OneToMany(mappedBy = "doctor")
+    public Set<Patients> getPatientSet() {
+        return patientSet;
     }
 
+    public void setPatientSet(Set<Patients> patientSet) {
+        this.patientSet = patientSet;
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getId() {
@@ -32,8 +41,9 @@ public class Patients {
 
     public void setId(int id) {
         this.id = id;
-}
-    @Column(name="username",unique = true)
+    }
+
+    @Column(name = "username",unique = true)
     public String getUsername() {
         return username;
     }
@@ -41,7 +51,7 @@ public class Patients {
     public void setUsername(String username) {
         this.username = username;
     }
-    @Column(name="password")
+
     public String getPassword() {
         return password;
     }
@@ -50,18 +60,8 @@ public class Patients {
         this.password = password;
     }
 
-    @ManyToOne
-    @JoinColumn(name="doctor_id")
-    public Doctors getDoctor() {
-        return doctor;
-    }
-
-    public void setDoctor(Doctors doctor) {
-        this.doctor = doctor;
-    }
-
     @Override
     public String toString() {
-        return "编号:"+id+" 用户名："+username;
+        return "编号："+id+" 医生用户名："+username;
     }
 }

@@ -38,6 +38,7 @@
         <property name="annotatedClasses">
             <list>
                 <value>com.shinerio.domain.Patients</value>
+                <value>com.shinerio.domain.Doctors</value>
             </list>
         </property>
     </bean>
@@ -51,11 +52,12 @@
     <!-- 注册注解的后台处理类 -->
     <context:annotation-config/>
     <!-- 指明使用注解的类的包 -->
-    <context:component-scan base-package="com.shinerio.domain"/>
     <context:component-scan base-package="com.shinerio.dao"/>
 
-    <bean id="user_test" class="com.shinerio.domain.Patients"></bean>
-    <bean id="userDao_test" class="com.shinerio.dao.PatientsDao">
+    <bean id="doctorDao_test" class="com.shinerio.dao.DoctorDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="patientsDao_test" class="com.shinerio.dao.PatientsDao">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 </beans>
