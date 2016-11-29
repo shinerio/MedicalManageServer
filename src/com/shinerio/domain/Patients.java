@@ -1,4 +1,4 @@
-package com.shinerio.dotest;
+package com.shinerio.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,17 +9,17 @@ import javax.persistence.Table;
  * Created by jstxzhangrui on 2016/11/26.
  */
 @Entity
-@Table(name="USERS")
-public class Users {
+@Table(name="Patients")
+public class Patients {
 
     private int id;
     public String username;
     public String password;
 
-    public Users() {
+    public Patients() {
     }
 
-    public Users(int id, String username, String password) {
+    public Patients(int id, String username, String password) {
         this.id = id;
         this.username = username;
         this.password = password;

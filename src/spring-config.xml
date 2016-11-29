@@ -16,9 +16,9 @@
 
     <!-- 数据源对象 -->
     <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
-        <property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl">
+        <property name="url" value="jdbc:mysql://localhost:3306/medicalmanage?CharSet=utf8&amp;useUnicode=true&amp;characterEncoding=utf-8">
         </property>
-        <property name="username" value="jack"></property>
+        <property name="username" value="root"></property>
         <property name="password" value="admin"></property>
     </bean>
 
@@ -31,13 +31,13 @@
         <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.dialect">
-                    org.hibernate.dialect.Oracle9iDialect
+                    org.hibernate.dialect.MySQLDialect
                 </prop>
             </props>
         </property>
         <property name="annotatedClasses">
             <list>
-                <value>com.shinerio.dotest.Users</value>
+                <value>com.shinerio.domain.Patients</value>
             </list>
         </property>
     </bean>
@@ -51,10 +51,11 @@
     <!-- 注册注解的后台处理类 -->
     <context:annotation-config/>
     <!-- 指明使用注解的类的包 -->
-    <context:component-scan base-package="com.shinerio.dotest"/>
+    <context:component-scan base-package="com.shinerio.domain"/>
+    <context:component-scan base-package="com.shinerio.dao"/>
 
-    <bean id="user_test" class="com.shinerio.dotest.Users"></bean>
-    <bean id="userDao_test" class="com.shinerio.dotest.UsersDAO">
+    <bean id="user_test" class="com.shinerio.domain.Patients"></bean>
+    <bean id="userDao_test" class="com.shinerio.dao.PatientsDao">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 </beans>

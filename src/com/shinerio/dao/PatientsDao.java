@@ -1,17 +1,15 @@
-package com.shinerio.dotest;
+package com.shinerio.dao;
 
+import com.shinerio.domain.Patients;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.Query;
-import java.sql.PreparedStatement;
-
 /**
  * Created by jstxzhangrui on 2016/11/26.
  */
-public class UsersDAO {
+public class PatientsDao {
     private SessionFactory sessionFactory;
 
     public SessionFactory getSessionFactory() {
@@ -26,16 +24,24 @@ public class UsersDAO {
         return sessionFactory.getCurrentSession();
     }
     @Transactional(readOnly = true,propagation = Propagation.REQUIRED)
-    public Users getUserByID(int id){
+    public Patients getPatientByID(int id){
         Session session = getCurrentSession();
         try {
-            Users instance = (Users) session.get(
-                    "com.shinerio.dotest.Users", id);
+            Patients instance = (Patients) session.get(
+                    "com.shinerio.domain.Patients", id);
             return instance;
         } catch (RuntimeException re) {
             throw re;
         }
     }
-
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void  savePatient(Patients patient){
+        Session session = getCurrentSession();
+        try {
+            session.save(patient);
+        } catch (RuntimeException re) {
+            throw re;
+        }
+    }
 
 }
