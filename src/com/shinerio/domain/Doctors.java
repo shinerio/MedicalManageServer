@@ -8,7 +8,7 @@ import java.util.Set;
  * Created by jstxzhangrui on 2016/11/29.
  */
 @Entity
-@Table(name="doctors")
+@Table(name="DOCTORS")
 public class Doctors {
     private int id;
     private String username;
@@ -25,6 +25,12 @@ public class Doctors {
         this.password = password;
         this.id = id;
     }
+
+    public Doctors(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
     @OneToMany(mappedBy = "doctor")
     public Set<Patients> getPatientSet() {
         return patientSet;
@@ -43,7 +49,7 @@ public class Doctors {
         this.id = id;
     }
 
-    @Column(name = "username",unique = true)
+    @Column(name = "username",nullable = false,unique = false)
     public String getUsername() {
         return username;
     }
@@ -52,6 +58,7 @@ public class Doctors {
         this.username = username;
     }
 
+    @Column(name = "password",nullable = true,unique = false)
     public String getPassword() {
         return password;
     }

@@ -18,13 +18,13 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 -- Table structure for patients
 -- ----------------------------
-DROP TABLE IF EXISTS `patients`;
-CREATE TABLE `patients` (
+DROP TABLE IF EXISTS `PATIENTS`;
+CREATE TABLE `PATIENTS` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(50) NOT NULL,
   `password` varchar(50) DEFAULT NULL,
   `doctor_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `petient_ref_doctor` (`doctor_id`),
-  CONSTRAINT `petient_ref_doctor` FOREIGN KEY (`doctor_id`) REFERENCES `doctors` (`id`)
+  CONSTRAINT `petient_ref_doctor` FOREIGN KEY (`doctor_id`) REFERENCES `DOCTORS` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;

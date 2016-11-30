@@ -19,7 +19,7 @@ public class TestMain {
     public void insertDoctor(){
         BeanFactory beanFactory = new ClassPathXmlApplicationContext("spring-config.xml");
         DoctorDao doctorDao = beanFactory.getBean("doctorDao_test",DoctorDao.class);
-        Doctors doctor = new Doctors(1,"tom","admin");
+        Doctors doctor = new Doctors("tom","admin");
         doctorDao.saveDoctor(doctor);
     }
 
@@ -41,7 +41,7 @@ public class TestMain {
         BeanFactory beanFactory = new ClassPathXmlApplicationContext("spring-config.xml");
         PatientsDao patientsDao = beanFactory.getBean("patientsDao_test",PatientsDao.class);
         Doctors doctor = getDoctor();
-        Patients patient = new Patients(1,"JACK","ADMIN",doctor);
+        Patients patient = new Patients("JACK","ADMIN",doctor);
         patientsDao.savePatient(patient);
     }
 

@@ -6,7 +6,7 @@ import javax.persistence.*;
  * Created by jstxzhangrui on 2016/11/26.
  */
 @Entity
-@Table(name="Patients")
+@Table(name="PATIENTS")
 public class Patients {
 
     private int id;
@@ -17,11 +17,17 @@ public class Patients {
     public Patients() {
     }
 
-    public Patients(int id, String username, String password, Doctors doctor) {
+    public Patients(int id,  String username,String password, Doctors doctor) {
         this.id = id;
-        this.username = username;
         this.password = password;
+        this.username = username;
         this.doctor = doctor;
+    }
+
+    public Patients(String username, String password,Doctors doctor ) {
+        this.username = username;
+        this.doctor = doctor;
+        this.password = password;
     }
 
     @Id
@@ -33,7 +39,7 @@ public class Patients {
     public void setId(int id) {
         this.id = id;
 }
-    @Column(name="username",unique = true)
+    @Column(name="username",nullable = false)
     public String getUsername() {
         return username;
     }

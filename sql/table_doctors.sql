@@ -18,8 +18,8 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 -- Table structure for doctors
 -- ----------------------------
-DROP TABLE IF EXISTS `doctors`;
-CREATE TABLE `doctors` (
+DROP TABLE IF EXISTS `DOCTORS`;
+CREATE TABLE `DOCTORS` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(50) NOT NULL,
   `password` varchar(50) DEFAULT NULL,
